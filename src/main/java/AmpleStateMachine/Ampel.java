@@ -15,8 +15,14 @@ public class Ampel extends CustomComponent implements EventHandler {
     Button red;
     Button yellow;
     Button green;
+    Boolean kontaktSchleife = false;
+    Boolean hasError = false;
+
 
     public Ampel(){
+
+
+
         state = new IdleState(this);
         this.ampel = this;
         VerticalLayout panelContent = new VerticalLayout();
@@ -25,6 +31,8 @@ public class Ampel extends CustomComponent implements EventHandler {
         green = new Button("green");
         Button start = new Button("start");
         Button stop = new Button("stop");
+        Button error = new Button("generate error");
+        Button kontaktSchleifebtn = new Button("Kontaktschleife error");
         //to show witch is enabled
         red.setEnabled(false);
         yellow.setEnabled(false);
@@ -39,6 +47,33 @@ public class Ampel extends CustomComponent implements EventHandler {
                 ampel.handleStart();
             }
         });
+        error.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                ampel.handleError();
+            }
+        });
+
+        kontaktSchleifebtn.addClickListener(new Button.ClickListener() {
+            @Override
+            public void buttonClick(Button.ClickEvent clickEvent) {
+                if (kontaktSchleife){
+                    ampel.setkontaktSchleife(false);
+                }
+                else {
+                    ampel.setkontaktSchleife(true);
+
+                }
+            }
+        });
+
+        /////temp
+        green.addStyleName("status-running");
+        red.addStyleName("status-stopped");
+        yellow.addStyleName("status-stopped");
+        start.addStyleName("status-stopped");
+        stop.addStyleName("status-stopped");
+        /////temp
 
         panelContent.addComponents(red, yellow, green, start, stop);
         setCompositionRoot(panelContent);
@@ -56,25 +91,39 @@ public class Ampel extends CustomComponent implements EventHandler {
 
     @Override
     public void handleStart() {
-        try{
+
             this.state.handleStart();
-        }
-        catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+
 
     }
 
     @Override
     public void handleStop() {
+        this.state.handleStop();
 
+    }
+
+    @Override
+    public void handleKontaktschleife() {
+        this.state.handleStart();
+    }
+
+    @Override
+    public void handleError() {
+        this.state.handleError();
+
+    }
+
+    public State getStateOfAmpel(){
+        return this.state;
     }
 
     public void setGreen(){
 
-        this.green.setEnabled(true);
-        this.red.setEnabled(false);
-        this.yellow.setEnabled(false);
+        this.green.addStyleName("status-running");
+        this.red.addStyleName("status-stopped");
+        this.yellow.addStyleName("status-stopped");
+
 
 
     }
@@ -91,6 +140,28 @@ public class Ampel extends CustomComponent implements EventHandler {
         this.yellow.setEnabled(true);
         this.red.setEnabled(false);
         this.green.setEnabled(false);
+    }
+
+    public void setBlank(){
+        this.yellow.setEnabled(false);
+        this.red.setEnabled(false);
+        this.green.setEnabled(false);
+    }
+
+    public void setkontaktSchleife(Boolean typ){
+        ampel.kontaktSchleife = typ;
+    }
+
+    public boolean getkontaktSchleife(){
+        return this.kontaktSchleife;
+    }
+
+    public boolean getHasError(){
+        return this.hasError;
+    }
+
+    public void setHasError(Boolean typ){
+        this.hasError = typ;
     }
 
 }

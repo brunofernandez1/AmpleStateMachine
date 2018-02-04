@@ -13,26 +13,40 @@ public class StartState extends State {
     @Override
     public void handleStart() {
         ampel.setState(this);
-        try{
-            for (int i=0; i<20; i++){
+        //while (!ampel.getkontaktSchleife() | !ampel.getHasError()) {
+
                 ampel.setGreen();
+        System.out.println("green was set");
+                //ampel.setYellow();
+                //ampel.setRed();
+                //ampel.setYellow();
+        //}
 
-                ampel.setYellow();
-
-                ampel.setRed();
-
-                ampel.setYellow();
-
-            }
+        if (ampel.getkontaktSchleife()){
+            ampel.setState(this);
+            ampel.handleStart();
+            ampel.setkontaktSchleife(false);
         }
-        catch (Exception e) {
-            e.printStackTrace();
-        }
 
+        if (ampel.getHasError()){
+            ampel.setState(new ErrorState(ampel));
+            ampel.handleError();
+        }
     }
 
     @Override
     public void handleStop() {
+        ampel.setState(new IdleState(ampel));
 
+    }
+
+    @Override
+    public void handleKontaktschleife() {
+        ampel.setState(new StartState(ampel));
+    }
+
+    @Override
+    public void handleError() {
+        ampel.setState(new ErrorState(ampel));
     }
 }

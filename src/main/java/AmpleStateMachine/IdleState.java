@@ -14,6 +14,16 @@ public class IdleState extends State {
 
     @Override
     public void handleStop() {
+        super.ampel.setState(new IdleState(ampel));
+    }
 
+    @Override
+    public void handleKontaktschleife() {
+        //do nothing here
+    }
+
+    @Override
+    public void handleError() {
+        super.ampel.setState(new ErrorState(ampel));
     }
 }

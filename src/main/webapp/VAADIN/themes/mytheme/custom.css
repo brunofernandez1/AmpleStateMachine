@@ -1,0 +1,13 @@
+.status-stopped,  .status-runninig {
+  color: whitesmoke;
+  padding: 4px;
+  border-radius: 6px;
+}
+
+.status-running {
+  background: green;
+}
+
+.status-stopped {
+  background : red;
+}

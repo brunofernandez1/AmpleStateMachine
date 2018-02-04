@@ -1,11 +1,13 @@
 AmpleStateMachine\Ampel$2.class
-AmpleStateMachine\Ampel.class
 AmpleStateMachine\Ampeltester.class
-AmpleStateMachine\IdleState.class
-AmpleStateMachine\FehlerState.class
+AmpleStateMachine\ErrorState.class
 AmpleStateMachine\State.class
 AmpleStateMachine\MyUI$MyUIServlet.class
-AmpleStateMachine\StartState.class
 AmpleStateMachine\Ampel$1.class
+AmpleStateMachine\Ampel.class
+AmpleStateMachine\IdleState.class
+AmpleStateMachine\Ampel$4.class
+AmpleStateMachine\Ampel$3.class
+AmpleStateMachine\StartState.class
 AmpleStateMachine\MyUI.class
 AmpleStateMachine\EventHandler.class
