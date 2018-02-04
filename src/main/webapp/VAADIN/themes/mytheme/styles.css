@@ -14764,3 +14764,19 @@ div.v-layout.v-horizontal.v-widget {
 	width: 19px;
 	overflow: hidden;
 }
+
+.mytheme .status-running-green {
+	border: 2px solid #4CAF50;
+}
+
+.mytheme .status-running-red {
+	border: 2px solid red;
+}
+
+.mytheme .status-running-yellow {
+	border: 2px solid yellow;
+}
+
+.mytheme .status-stopped {
+	border: 1px solid #c5c5c5;
+}

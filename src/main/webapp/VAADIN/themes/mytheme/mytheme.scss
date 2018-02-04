@@ -35,4 +35,22 @@
   @include valo;
 
   // Insert your own theme rules here
+  .status-running-green {
+    border: 2px solid #4CAF50; /* Green */
+
+  }
+  .status-running-red {
+      border: 2px solid red; /* Green */
+
+  }
+
+  .status-running-yellow {
+          border: 2px solid yellow; /* Green */
+
+  }
+
+
+  .status-stopped {
+        border: 1px solid #c5c5c5;
+  }
 }

@@ -33,14 +33,13 @@ public class Ampel extends CustomComponent implements EventHandler {
         Button stop = new Button("stop");
         Button error = new Button("generate error");
         Button kontaktSchleifebtn = new Button("Kontaktschleife error");
-        //to show witch is enabled
-        red.setEnabled(false);
-        yellow.setEnabled(false);
-        green.setEnabled(false);
+
         stop.addClickListener(new Button.ClickListener() {
             public void buttonClick(Button.ClickEvent event) {
                 ampel.handleStop();
+                System.out.println("test");
             }
+
         });
         start.addClickListener(new Button.ClickListener() {
             public void buttonClick(Button.ClickEvent event) {
@@ -67,15 +66,7 @@ public class Ampel extends CustomComponent implements EventHandler {
             }
         });
 
-        /////temp
-        green.addStyleName("status-running");
-        red.addStyleName("status-stopped");
-        yellow.addStyleName("status-stopped");
-        start.addStyleName("status-stopped");
-        stop.addStyleName("status-stopped");
-        /////temp
-
-        panelContent.addComponents(red, yellow, green, start, stop);
+        panelContent.addComponents(red, yellow, green, start, stop, error, kontaktSchleifebtn);
         setCompositionRoot(panelContent);
 
         // Set the size as undefined at all levels
@@ -120,8 +111,13 @@ public class Ampel extends CustomComponent implements EventHandler {
 
     public void setGreen(){
 
-        this.green.addStyleName("status-running");
+        this.green.removeStyleName("status-stopped");
+        this.green.addStyleName("status-running-green");
+
+        this.red.removeStyleName("status-running-red");
         this.red.addStyleName("status-stopped");
+
+        this.yellow.removeStyleName("status-running-yellow");
         this.yellow.addStyleName("status-stopped");
 
 
@@ -129,23 +125,37 @@ public class Ampel extends CustomComponent implements EventHandler {
     }
 
     public void setRed(){
-        this.red.setEnabled(true);
-        this.green.setEnabled(false);
-        this.yellow.setEnabled(false);
+        this.green.removeStyleName("status-running-green");
+        this.green.addStyleName("status-stopped");
+
+        this.red.removeStyleName("status-stopped");
+        this.red.addStyleName("status-running-red");
+
+        this.yellow.removeStyleName("status-running-yellow");
+        this.yellow.addStyleName("status-stopped");
 
 
     }
 
     public void setYellow(){
-        this.yellow.setEnabled(true);
-        this.red.setEnabled(false);
-        this.green.setEnabled(false);
+        this.green.removeStyleName("status-running-green");
+        this.green.addStyleName("status-stopped");
+
+        this.red.removeStyleName("status-running-red");
+        this.red.addStyleName("status-stopped");
+
+        this.yellow.removeStyleName("status-stopped");
+        this.yellow.addStyleName("status-running-yellow");
     }
 
     public void setBlank(){
-        this.yellow.setEnabled(false);
-        this.red.setEnabled(false);
-        this.green.setEnabled(false);
+        this.yellow.removeStyleName("status-running-yellow");
+        this.red.removeStyleName("status-running-red");
+        this.green.removeStyleName("status-running-green");
+
+        this.green.addStyleName("status-stopped");
+        this.red.addStyleName("status-stopped");
+        this.yellow.addStyleName("status-stopped");
     }
 
     public void setkontaktSchleife(Boolean typ){
