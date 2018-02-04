@@ -3,17 +3,18 @@ package AmpleStateMachine;
 public class FehlerState extends State {
 
 
-    public FehlerState(EventHandlerImpl ampel, String stateName) {
-        super(ampel, stateName);
+    public FehlerState(Ampel ampel) {
+        super(ampel);
+    }
+
+
+    @Override
+    public void handleStart() {
+
     }
 
     @Override
-    public void handleKontaktschleife() {
-
-    }
-
-    @Override
-    public void handleFehler() {
+    public void handleStop() {
 
     }
 }

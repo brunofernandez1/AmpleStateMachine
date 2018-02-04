@@ -1,6 +1,6 @@
 package AmpleStateMachine;
 
 public interface EventHandler {
-    public void handleStart();
+    public void handleStart() throws InterruptedException;
     public void handleStop();
 }
